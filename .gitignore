@@ -6,3 +6,7 @@ venv3
 __pycache__/
 *.py[cod]
 *$py.class
+
+# vscode
+.vscode
+.pytest_cache
