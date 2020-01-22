@@ -198,7 +198,7 @@ class Client(object):
             requests.Timeout: Request timeout.
             ValueError or AttributeError: Malformed response from server.
         """
-        r = self.post('/api/odlcs', json=json.dumps(target.serialize()))
+        r = self.post('/api/odlcs', json=target.serialize())
         return Target.deserialize(r.json())
 
     def put_target(self, target_id, target):
@@ -215,7 +215,7 @@ class Client(object):
             ValueError or AttributeError: Malformed response from server.
         """
         r = self.put('/api/odlcs/%d' % target_id,
-                     json=json.dumps(target.serialize()))
+                     json=target.serialize())
         return Target.deserialize(r.json())
 
     def delete_target(self, target_id):
