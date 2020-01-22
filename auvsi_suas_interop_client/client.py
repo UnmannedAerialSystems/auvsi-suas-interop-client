@@ -264,7 +264,7 @@ class Client(object):
             InteropError: Error from server.
             requests.Timeout: Request timeout.
         """
-        self.put('/api/odlcs/%d/image' % target_id, json=image_data)
+        self.put('/api/odlcs/%d/image' % target_id, data=image_data)
 
     def delete_target_image(self, target_id):
         """DELETE target image.
