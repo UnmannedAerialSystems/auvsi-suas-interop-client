@@ -245,9 +245,9 @@ class Target(ClientBaseType):
             latitude must also be provided.
         orientation: Optional. Target orientation.
         shape: Optional. Target shape.
-        background_color: Optional. Target color.
+        shapeColor: Optional. Target color.
         alphanumeric: Optional. Target alphanumeric. [0-9, a-z, A-Z].
-        alphanumeric_color: Optional. Target alphanumeric color.
+        alphanumericColor: Optional. Target alphanumeric color.
         description: Optional. Free-form description of the target, used for
             certain target types.
         autonomous: Optional; defaults to False. Indicates that this is an
@@ -262,7 +262,7 @@ class Target(ClientBaseType):
     """
 
     attrs = ['id', 'user', 'type', 'latitude', 'longitude', 'orientation',
-             'shape', 'background_color', 'alphanumeric', 'alphanumeric_color',
+             'shape', 'shapeColor', 'alphanumeric', 'alphanumericColor',
              'description', 'autonomous', 'team_id', 'actionable_override']
 
     def __init__(self,
@@ -273,9 +273,9 @@ class Target(ClientBaseType):
                  longitude=None,
                  orientation=None,
                  shape=None,
-                 background_color=None,
+                 shapeColor=None,
                  alphanumeric=None,
-                 alphanumeric_color=None,
+                 alphanumericColor=None,
                  description=None,
                  autonomous=False,
                  team_id=None,
@@ -287,9 +287,9 @@ class Target(ClientBaseType):
         self.longitude = float(longitude) if longitude is not None else None
         self.orientation = orientation
         self.shape = shape
-        self.background_color = background_color
+        self.shapeColor = shapeColor
         self.alphanumeric = alphanumeric
-        self.alphanumeric_color = alphanumeric_color
+        self.alphanumericColor = alphanumericColor
         self.description = description
         self.autonomous = autonomous
         self.actionable_override = actionable_override
