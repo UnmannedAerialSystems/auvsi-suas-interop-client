@@ -236,6 +236,7 @@ class Target(ClientBaseType):
     Attributes:
         id: Optional. The ID of the target. Assigned by the interoperability
             server.
+        mission: Required. The ID of the mission.
         user: Optional. The ID of the user who created the target. Assigned by
             the interoperability server.
         type: Target type, must be one of TargetType.
@@ -261,13 +262,13 @@ class Target(ClientBaseType):
         ValueError: Argument not valid.
     """
 
-    attrs = ['id', 'user', 'type', 'latitude', 'longitude', 'orientation',
+    attrs = ['id', 'mission', 'type', 'latitude', 'longitude', 'orientation',
              'shape', 'shapeColor', 'alphanumeric', 'alphanumericColor',
-             'description', 'autonomous', 'team_id', 'actionable_override']
+             'description', 'autonomous']
 
     def __init__(self,
+                 mission,
                  id=None,
-                 user=None,
                  type=None,
                  latitude=None,
                  longitude=None,
@@ -277,11 +278,9 @@ class Target(ClientBaseType):
                  alphanumeric=None,
                  alphanumericColor=None,
                  description=None,
-                 autonomous=False,
-                 team_id=None,
-                 actionable_override=None):
+                 autonomous=False):
+        self.mission = mission
         self.id = id
-        self.user = user
         self.type = type
         self.latitude = float(latitude) if latitude is not None else None
         self.longitude = float(longitude) if longitude is not None else None
@@ -292,5 +291,3 @@ class Target(ClientBaseType):
         self.alphanumericColor = alphanumericColor
         self.description = description
         self.autonomous = autonomous
-        self.actionable_override = actionable_override
-        self.team_id = team_id
