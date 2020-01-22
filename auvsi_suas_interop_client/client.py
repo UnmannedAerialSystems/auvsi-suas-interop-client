@@ -48,7 +48,7 @@ class Client(object):
 
         # All endpoints require authentication, so always login.
         self.post('/api/login',
-                  data={'username': username,
+                  json={'username': username,
                         'password': password})
 
     def get(self, uri, **kwargs):
@@ -132,7 +132,7 @@ class Client(object):
             InteropError: Error from server.
             requests.Timeout: Request timeout.
         """
-        self.post('/api/telemetry', data=telem.serialize())
+        self.post('/api/telemetry', json=telem.serialize())
 
     def get_obstacles(self):
         """GET obstacles.
@@ -198,7 +198,7 @@ class Client(object):
             requests.Timeout: Request timeout.
             ValueError or AttributeError: Malformed response from server.
         """
-        r = self.post('/api/odlcs', data=json.dumps(target.serialize()))
+        r = self.post('/api/odlcs', json=json.dumps(target.serialize()))
         return Target.deserialize(r.json())
 
     def put_target(self, target_id, target):
@@ -215,7 +215,7 @@ class Client(object):
             ValueError or AttributeError: Malformed response from server.
         """
         r = self.put('/api/odlcs/%d' % target_id,
-                     data=json.dumps(target.serialize()))
+                     json=json.dumps(target.serialize()))
         return Target.deserialize(r.json())
 
     def delete_target(self, target_id):
@@ -264,7 +264,7 @@ class Client(object):
             InteropError: Error from server.
             requests.Timeout: Request timeout.
         """
-        self.put('/api/odlcs/%d/image' % target_id, data=image_data)
+        self.put('/api/odlcs/%d/image' % target_id, json=image_data)
 
     def delete_target_image(self, target_id):
         """DELETE target image.
