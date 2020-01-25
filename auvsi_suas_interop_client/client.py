@@ -8,10 +8,9 @@ features. A simpler Client is also given as a base implementation.
 See README.md for more details."""
 
 from concurrent.futures import ThreadPoolExecutor
-import functools
-import json
 import requests
-import threading
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from .exceptions import InteropError
 from .interop_types import Mission
@@ -45,6 +44,8 @@ class Client(object):
         self.timeout = timeout
 
         self.session = requests.Session()
+        retries = Retry(total=6, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
+        self.session.mount('http://', HTTPAdapter(max_retries=retries))
 
         # All endpoints require authentication, so always login.
         self.post('/api/login',
